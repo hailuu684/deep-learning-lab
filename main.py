@@ -40,8 +40,8 @@ def main(lab):
 
         from models import resnet
         resnet_model = resnet.ResNet(resnet.ResNetBlock, [2, 2, 2, 2])
-
         lightning_resnet_model = lab03.ResNetLightning(resnet_model)
+
         # start a new wandb run to track this script
         wandb_logger = WandbLogger(project="lab-03")
 
@@ -53,13 +53,13 @@ def main(lab):
         ]
 
         trainer = pl.Trainer(
-            max_epochs=10,
+            max_epochs=100,
             logger=wandb_logger,
             callbacks=callbacks
         )
 
         # Train the model
-        trainer.fit(lightning_resnet_model, dm)
+        trainer.fit(model, dm)
 
         # Evaluate the model
         trainer.test(dataloaders=dm.test_dataloader())
