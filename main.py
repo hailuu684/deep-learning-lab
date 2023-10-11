@@ -38,6 +38,10 @@ def main(lab):
         dm.setup()
         model = lab03.CIFARLitModel((3, 32, 32), dm.num_classes)
 
+        from models import resnet
+        resnet_model = resnet.ResNet(resnet.ResNetBlock, [2, 2, 2, 2])
+
+        lightning_resnet_model = lab03.ResNetLightning(resnet_model)
         # start a new wandb run to track this script
         wandb_logger = WandbLogger(project="lab-03")
 
@@ -55,7 +59,7 @@ def main(lab):
         )
 
         # Train the model
-        trainer.fit(model, dm)
+        trainer.fit(lightning_resnet_model, dm)
 
         # Evaluate the model
         trainer.test(dataloaders=dm.test_dataloader())

@@ -1,5 +1,5 @@
 # deep-learning-lab
-Task 1: Lab02, added Linear layer with 256 neurons
+**Task 1:** Lab02, added Linear layer with 256 neurons
 
 Results:
 
@@ -8,4 +8,12 @@ Test metric             DataLoader 0
 test_acc            0.7263000011444092
 
 test_loss           0.9059683680534363
+
+--
+
+**Task 2:** Lab 03a, Run with wandb at least 3 times
+
+First experience: https://api.wandb.ai/links/deep-learning-lab-msc/qjy7acwt
+
+
 

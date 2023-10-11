@@ -150,3 +150,60 @@ class CIFARLitModel(pl.LightningModule):
         optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate)
         return optimizer
 
+
+class ResNetLightning(pl.LightningModule):
+    def __init__(self, resnet_model=None,
+                 learning_rate=0.001,
+                 *args,
+                 **kwargs):
+        super().__init__(*args, **kwargs)
+        self.resnet = resnet_model
+        self.criterion = nn.CrossEntropyLoss()
+        self.learning_rate = learning_rate
+
+        # log hyperparameters
+        self.save_hyperparameters()
+        self.learning_rate = learning_rate
+        self.accuracy = Accuracy(task="multiclass", num_classes=10)
+        self.confusion_matrix = MulticlassConfusionMatrix(num_classes=10)
+
+    def forward(self, x):
+        return self.resnet(x)
+
+    def training_step(self, batch, batch_idx):
+        x, y = batch
+        logits = self(x)
+        loss = F.nll_loss(logits, y)
+
+        # metric
+        preds = torch.argmax(logits, dim=1)
+        acc = self.accuracy(preds, y)
+        self.log('train_loss', loss, on_step=True, on_epoch=True, logger=True)
+        self.log('train_acc', acc, on_step=True, on_epoch=True, logger=True)
+        return loss
+
+    def validation_step(self, batch, batch_idx):
+        x, y = batch
+        logits = self(x)
+        loss = F.nll_loss(logits, y)
+
+        preds = torch.argmax(logits, dim=1)
+        acc = self.accuracy(preds, y)
+        self.log('val_loss', loss, prog_bar=True)
+        self.log('val_acc', acc, prog_bar=True)
+        return loss
+
+    def test_step(self, batch, batch_idx):
+        x, y = batch
+        logits = self(x)
+        loss = F.nll_loss(logits, y)
+
+        preds = torch.argmax(logits, dim=1)
+        acc = self.accuracy(preds, y)
+        self.log('test_loss', loss, prog_bar=True)
+        self.log('test_acc', acc, prog_bar=True)
+        return loss
+
+    def configure_optimizers(self):
+        optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate, momentum=0.9)
+        return optimizer
