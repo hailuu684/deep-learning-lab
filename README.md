@@ -16,4 +16,7 @@ test_loss           0.9059683680534363
 First experience: https://api.wandb.ai/links/deep-learning-lab-msc/qjy7acwt
 
 
+Second experience: https://wandb.ai/deep-learning-lab-msc/lab-03/reports/Lab03-Second-Exp--Vmlldzo1NjQ2ODQ4
 
+
+Third experience: https://api.wandb.ai/links/deep-learning-lab-msc/sadnrys3

@@ -205,5 +205,6 @@ class ResNetLightning(pl.LightningModule):
         return loss
 
     def configure_optimizers(self):
-        optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate, momentum=0.9)
+        # optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate, momentum=0.9)
+        optimizer = torch.optim.AdamW(self.parameters())
         return optimizer
