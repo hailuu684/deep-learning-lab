@@ -20,3 +20,8 @@ Second experience: https://wandb.ai/deep-learning-lab-msc/lab-03/reports/Lab03-S
 
 
 Third experience: https://api.wandb.ai/links/deep-learning-lab-msc/sadnrys3
+
+**Task 3:** Lab04a, Run sweep
+Sweep report: https://wandb.ai/deep-learning-lab-msc/sweep-lab04/reports/Sweep-lab04--Vmlldzo1NzIxODM1?accessToken=4mwahrhez0of817m6rb7mp9szvjdkeyzfn7g8tjbymmyfqffwgd04n2lkyh2gzub
+
+Csv file is added
